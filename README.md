@@ -1,12 +1,22 @@
 # Family Medicine Referral Router
 
-Interactive web application for navigating medical referral pathways in the Eastern Health Cluster.
+No-code builder for medical referral pathways with two-way JSON sync.
 
 ## Features
 
-- **Pathway Navigator**: Interactive navigation through clinical pathways (e.g., Adult Obesity Pathway)
-- **Data Structure Explorer**: View the hierarchical structure of clusters, networks, centers, and clinics
-- **Referral Assistant**: Find available clinics based on specialty and patient constraints
+- **Visual Pathway Editor**: Drag-and-drop flowchart editor using React Flow
+  - Add, edit, delete pathway nodes
+  - Connect nodes visually
+  - Color-coded node types (assessment, decision, treatment, referral, etc.)
+
+- **Health System Editor**: Edit the hierarchical structure
+  - Clusters, Networks, Centers, Clinics
+  - Add/edit/delete clinics with constraints (age, gender, status)
+
+- **JSON Editor**: Direct JSON editing with two-way sync
+  - Edit raw JSON for clusters and pathways
+  - Import/Export full data
+  - Changes sync to visual editor immediately
 
 ## Data Structure
 
@@ -25,26 +35,51 @@ Cluster (التجمع الصحي)
 ## Installation
 
 ```bash
-# Create virtual environment
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-
-# Install dependencies
-pip install -r requirements.txt
+cd frontend
+npm install
 ```
 
 ## Running the App
 
 ```bash
-streamlit run app.py
+cd frontend
+npm run dev
 ```
 
-The app will open in your browser at `http://localhost:8501`
+The app will open in your browser at `http://localhost:5173`
+
+## Building for Production
+
+```bash
+cd frontend
+npm run build
+```
+
+The built files will be in `frontend/dist/`
 
 ## Data Files
 
 - `data/clusters.json` - Health system hierarchy (clusters, networks, centers, clinics)
 - `data/pathways.json` - Clinical pathways with decision nodes and rules
+
+## Tech Stack
+
+- **React 19** + TypeScript
+- **Vite** - Build tool
+- **React Flow** - Visual flowchart editor
+- **MUI (Material UI)** - UI components
+- **Zustand** - State management with two-way sync
+
+## Two-Way JSON Sync
+
+The application maintains synchronization between:
+1. Visual editors (Pathway Editor, Health System Editor)
+2. Raw JSON data
+
+Changes in either direction are immediately reflected:
+- Edit a node in the visual editor → JSON updates
+- Edit JSON directly → Visual editor updates
+- Export/Import JSON to save/restore full state
 
 ## Adult Obesity Pathway
 
@@ -67,10 +102,19 @@ The implemented pathway follows this decision tree:
 
 ```
 fam-med-router/
-├── app.py              # Streamlit web application
-├── requirements.txt    # Python dependencies
-├── README.md          # This file
-└── data/
-    ├── clusters.json  # Health system structure
-    └── pathways.json  # Clinical pathways
+├── frontend/
+│   ├── src/
+│   │   ├── App.tsx           # Main app with tabs
+│   │   ├── store.ts          # Zustand store with two-way sync
+│   │   └── components/
+│   │       ├── PathwayEditor.tsx    # React Flow visual editor
+│   │       ├── PathwayNode.tsx      # Custom node component
+│   │       ├── ClustersEditor.tsx   # Health system editor
+│   │       └── JSONEditor.tsx       # Raw JSON editor
+│   ├── package.json
+│   └── vite.config.ts
+├── data/
+│   ├── clusters.json    # Health system structure
+│   └── pathways.json    # Clinical pathways
+└── README.md
 ```
