@@ -1,0 +1,645 @@
+{
+  "clusters": [
+    {
+      "id": "eastern",
+      "name": "Eastern Health Cluster",
+      "name_ar": "التجمع الصحي الشرقي",
+      "networks": [
+        {
+          "id": "dammam",
+          "name": "Dammam Network",
+          "name_ar": "شبكة الدمام",
+          "centers": [
+            {
+              "id": "phc_anak",
+              "name": "Al-Anak Primary Health Center",
+              "name_ar": "مركز العناك الصحي",
+              "type": "phc",
+              "layer": 1,
+              "location": {
+                "city": "Dammam",
+                "district": "Al-Anak"
+              },
+              "clinics": [
+                {
+                  "id": "fam_med_anak",
+                  "name": "Family Medicine Clinic",
+                  "specialty": "family_medicine",
+                  "status": "open",
+                  "constraints": {
+                    "age_min": 0,
+                    "age_max": 120,
+                    "gender": "all"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "phc_badiah",
+              "name": "Al-Badiah Primary Health Center",
+              "name_ar": "مركز البادية الصحي",
+              "type": "phc",
+              "layer": 1,
+              "location": {
+                "city": "Dammam",
+                "district": "Al-Badiah"
+              },
+              "clinics": [
+                {
+                  "id": "fam_med_badiah",
+                  "name": "Family Medicine Clinic",
+                  "specialty": "family_medicine",
+                  "status": "open",
+                  "constraints": {
+                    "age_min": 0,
+                    "age_max": 120,
+                    "gender": "all"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "phc_nakheel",
+              "name": "Al-Nakheel Primary Health Center",
+              "name_ar": "مركز النخيل الصحي",
+              "type": "phc",
+              "layer": 1,
+              "location": {
+                "city": "Dammam",
+                "district": "Al-Nakheel"
+              },
+              "clinics": [
+                {
+                  "id": "fam_med_nakheel",
+                  "name": "Family Medicine Clinic",
+                  "specialty": "family_medicine",
+                  "status": "open",
+                  "constraints": {
+                    "age_min": 0,
+                    "age_max": 120,
+                    "gender": "all"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "mega_dammam_south",
+              "name": "Dammam South Mega Center",
+              "name_ar": "مركز جنوب الدمام التخصصي",
+              "type": "mega",
+              "layer": 2,
+              "location": {
+                "city": "Dammam",
+                "district": "South Dammam"
+              },
+              "clinics": [
+                {
+                  "id": "obesity_clinic_south",
+                  "name": "Obesity Clinic",
+                  "specialty": "obesity",
+                  "status": "open",
+                  "constraints": {
+                    "age_min": 15,
+                    "age_max": 120,
+                    "gender": "all"
+                  },
+                  "services": [
+                    "health_coaching",
+                    "nutrition",
+                    "mental_health",
+                    "weight_management"
+                  ]
+                },
+                {
+                  "id": "internal_med_south",
+                  "name": "Internal Medicine Clinic",
+                  "specialty": "internal_medicine",
+                  "status": "open",
+                  "constraints": {
+                    "age_min": 15,
+                    "age_max": 120,
+                    "gender": "all"
+                  }
+                },
+                {
+                  "id": "endocrine_south",
+                  "name": "Endocrinology Clinic",
+                  "specialty": "endocrinology",
+                  "status": "open",
+                  "constraints": {
+                    "age_min": 15,
+                    "age_max": 120,
+                    "gender": "all"
+                  }
+                },
+                {
+                  "id": "cardiology_south",
+                  "name": "Cardiology Clinic",
+                  "specialty": "cardiology",
+                  "status": "open",
+                  "constraints": {
+                    "age_min": 15,
+                    "age_max": 120,
+                    "gender": "all"
+                  }
+                },
+                {
+                  "id": "psychiatric_south",
+                  "name": "Psychiatry Clinic",
+                  "specialty": "psychiatry",
+                  "status": "open",
+                  "constraints": {
+                    "age_min": 15,
+                    "age_max": 120,
+                    "gender": "all"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "mega_dammam_north",
+              "name": "Dammam North Mega Center",
+              "name_ar": "مركز شمال الدمام التخصصي",
+              "type": "mega",
+              "layer": 2,
+              "location": {
+                "city": "Dammam",
+                "district": "North Dammam"
+              },
+              "clinics": [
+                {
+                  "id": "obesity_clinic_north",
+                  "name": "Obesity Clinic",
+                  "specialty": "obesity",
+                  "status": "open",
+                  "constraints": {
+                    "age_min": 15,
+                    "age_max": 120,
+                    "gender": "all"
+                  },
+                  "services": [
+                    "health_coaching",
+                    "nutrition",
+                    "mental_health",
+                    "weight_management"
+                  ]
+                },
+                {
+                  "id": "pediatric_north",
+                  "name": "Pediatric Clinic",
+                  "specialty": "pediatrics",
+                  "status": "open",
+                  "constraints": {
+                    "age_min": 0,
+                    "age_max": 14,
+                    "gender": "all"
+                  }
+                },
+                {
+                  "id": "dermatology_north",
+                  "name": "Dermatology Clinic",
+                  "specialty": "dermatology",
+                  "status": "open",
+                  "constraints": {
+                    "age_min": 0,
+                    "age_max": 120,
+                    "gender": "all"
+                  }
+                },
+                {
+                  "id": "orthopedics_north",
+                  "name": "Orthopedics Clinic",
+                  "specialty": "orthopedics",
+                  "status": "open",
+                  "constraints": {
+                    "age_min": 15,
+                    "age_max": 120,
+                    "gender": "all"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "mega_dammam_central",
+              "name": "Dammam Central Mega Center",
+              "name_ar": "مركز وسط الدمام التخصصي",
+              "type": "mega",
+              "layer": 2,
+              "location": {
+                "city": "Dammam",
+                "district": "Central Dammam"
+              },
+              "clinics": [
+                {
+                  "id": "obesity_clinic_central",
+                  "name": "Obesity Clinic",
+                  "specialty": "obesity",
+                  "status": "open",
+                  "constraints": {
+                    "age_min": 15,
+                    "age_max": 120,
+                    "gender": "all"
+                  },
+                  "services": [
+                    "health_coaching",
+                    "nutrition",
+                    "mental_health",
+                    "weight_management"
+                  ]
+                },
+                {
+                  "id": "neurology_central",
+                  "name": "Neurology Clinic",
+                  "specialty": "neurology",
+                  "status": "open",
+                  "constraints": {
+                    "age_min": 15,
+                    "age_max": 120,
+                    "gender": "all"
+                  }
+                },
+                {
+                  "id": "gastro_central",
+                  "name": "Gastroenterology Clinic",
+                  "specialty": "gastroenterology",
+                  "status": "open",
+                  "constraints": {
+                    "age_min": 15,
+                    "age_max": 120,
+                    "gender": "all"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "mega_dammam_west",
+              "name": "Dammam West Mega Center",
+              "name_ar": "مركز غرب الدمام التخصصي",
+              "type": "mega",
+              "layer": 2,
+              "location": {
+                "city": "Dammam",
+                "district": "West Dammam"
+              },
+              "clinics": [
+                {
+                  "id": "obesity_clinic_west",
+                  "name": "Obesity Clinic",
+                  "specialty": "obesity",
+                  "status": "open",
+                  "constraints": {
+                    "age_min": 15,
+                    "age_max": 120,
+                    "gender": "all"
+                  },
+                  "services": [
+                    "health_coaching",
+                    "nutrition",
+                    "mental_health",
+                    "weight_management"
+                  ]
+                },
+                {
+                  "id": "urology_west",
+                  "name": "Urology Clinic",
+                  "specialty": "urology",
+                  "status": "open",
+                  "constraints": {
+                    "age_min": 15,
+                    "age_max": 120,
+                    "gender": "all"
+                  }
+                },
+                {
+                  "id": "oncology_west",
+                  "name": "Oncology Clinic",
+                  "specialty": "oncology",
+                  "status": "open",
+                  "constraints": {
+                    "age_min": 0,
+                    "age_max": 120,
+                    "gender": "all"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "dmc",
+              "name": "Dammam Medical Complex",
+              "name_ar": "مجمع الدمام الطبي",
+              "type": "hospital",
+              "layer": 3,
+              "location": {
+                "city": "Dammam",
+                "district": "Central"
+              },
+              "clinics": [
+                {
+                  "id": "bariatric_surgery",
+                  "name": "Bariatric Surgery Clinic",
+                  "specialty": "bariatric_surgery",
+                  "status": "open",
+                  "constraints": {
+                    "age_min": 18,
+                    "age_max": 65,
+                    "gender": "all"
+                  },
+                  "services": [
+                    "gastric_bypass",
+                    "sleeve_gastrectomy",
+                    "post_surgery_followup"
+                  ]
+                },
+                {
+                  "id": "general_surgery_dmc",
+                  "name": "General Surgery",
+                  "specialty": "general_surgery",
+                  "status": "open",
+                  "constraints": {
+                    "age_min": 0,
+                    "age_max": 120,
+                    "gender": "all"
+                  }
+                },
+                {
+                  "id": "plastic_surgery_dmc",
+                  "name": "Plastic Surgery",
+                  "specialty": "plastic_surgery",
+                  "status": "open",
+                  "constraints": {
+                    "age_min": 18,
+                    "age_max": 120,
+                    "gender": "all"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "mch_dammam",
+              "name": "Maternity and Children Hospital Dammam",
+              "name_ar": "مستشفى الولادة والأطفال بالدمام",
+              "type": "hospital",
+              "layer": 3,
+              "location": {
+                "city": "Dammam",
+                "district": "Central"
+              },
+              "clinics": [
+                {
+                  "id": "pediatric_obesity",
+                  "name": "Pediatric Obesity Clinic",
+                  "specialty": "pediatric_obesity",
+                  "status": "open",
+                  "constraints": {
+                    "age_min": 0,
+                    "age_max": 14,
+                    "gender": "all"
+                  }
+                },
+                {
+                  "id": "pediatric_endocrine",
+                  "name": "Pediatric Endocrinology",
+                  "specialty": "pediatric_endocrinology",
+                  "status": "open",
+                  "constraints": {
+                    "age_min": 0,
+                    "age_max": 14,
+                    "gender": "all"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "qatif",
+          "name": "Qatif Network",
+          "name_ar": "شبكة القطيف",
+          "centers": [
+            {
+              "id": "phc_qatif_central",
+              "name": "Qatif Central Primary Health Center",
+              "name_ar": "مركز القطيف المركزي الصحي",
+              "type": "phc",
+              "layer": 1,
+              "location": {
+                "city": "Qatif",
+                "district": "Central"
+              },
+              "clinics": [
+                {
+                  "id": "fam_med_qatif",
+                  "name": "Family Medicine Clinic",
+                  "specialty": "family_medicine",
+                  "status": "open",
+                  "constraints": {
+                    "age_min": 0,
+                    "age_max": 120,
+                    "gender": "all"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "mega_qatif",
+              "name": "Qatif Mega Center",
+              "name_ar": "مركز القطيف التخصصي",
+              "type": "mega",
+              "layer": 2,
+              "location": {
+                "city": "Qatif",
+                "district": "Central"
+              },
+              "clinics": [
+                {
+                  "id": "obesity_clinic_qatif",
+                  "name": "Obesity Clinic",
+                  "specialty": "obesity",
+                  "status": "open",
+                  "constraints": {
+                    "age_min": 15,
+                    "age_max": 120,
+                    "gender": "all"
+                  },
+                  "services": [
+                    "health_coaching",
+                    "nutrition",
+                    "mental_health"
+                  ]
+                },
+                {
+                  "id": "internal_med_qatif",
+                  "name": "Internal Medicine Clinic",
+                  "specialty": "internal_medicine",
+                  "status": "open",
+                  "constraints": {
+                    "age_min": 15,
+                    "age_max": 120,
+                    "gender": "all"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "qatif_general_hospital",
+              "name": "Qatif General Hospital",
+              "name_ar": "مستشفى القطيف العام",
+              "type": "hospital",
+              "layer": 3,
+              "location": {
+                "city": "Qatif",
+                "district": "Central"
+              },
+              "clinics": [
+                {
+                  "id": "bariatric_qatif",
+                  "name": "Bariatric Surgery Clinic",
+                  "specialty": "bariatric_surgery",
+                  "status": "limited",
+                  "constraints": {
+                    "age_min": 18,
+                    "age_max": 65,
+                    "gender": "all"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "khobar",
+          "name": "Khobar Network",
+          "name_ar": "شبكة الخبر",
+          "centers": [
+            {
+              "id": "phc_khobar_north",
+              "name": "Khobar North Primary Health Center",
+              "name_ar": "مركز شمال الخبر الصحي",
+              "type": "phc",
+              "layer": 1,
+              "location": {
+                "city": "Khobar",
+                "district": "North"
+              },
+              "clinics": [
+                {
+                  "id": "fam_med_khobar_north",
+                  "name": "Family Medicine Clinic",
+                  "specialty": "family_medicine",
+                  "status": "open",
+                  "constraints": {
+                    "age_min": 0,
+                    "age_max": 120,
+                    "gender": "all"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "mega_khobar",
+              "name": "Khobar Mega Center",
+              "name_ar": "مركز الخبر التخصصي",
+              "type": "mega",
+              "layer": 2,
+              "location": {
+                "city": "Khobar",
+                "district": "Central"
+              },
+              "clinics": [
+                {
+                  "id": "obesity_clinic_khobar",
+                  "name": "Obesity Clinic",
+                  "specialty": "obesity",
+                  "status": "open",
+                  "constraints": {
+                    "age_min": 15,
+                    "age_max": 120,
+                    "gender": "all"
+                  },
+                  "services": [
+                    "health_coaching",
+                    "nutrition",
+                    "mental_health"
+                  ]
+                },
+                {
+                  "id": "cardiology_khobar",
+                  "name": "Cardiology Clinic",
+                  "specialty": "cardiology",
+                  "status": "open",
+                  "constraints": {
+                    "age_min": 15,
+                    "age_max": 120,
+                    "gender": "all"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "jubail",
+          "name": "Jubail Network",
+          "name_ar": "شبكة الجبيل",
+          "centers": [
+            {
+              "id": "phc_jubail",
+              "name": "Jubail Primary Health Center",
+              "name_ar": "مركز الجبيل الصحي",
+              "type": "phc",
+              "layer": 1,
+              "location": {
+                "city": "Jubail",
+                "district": "Central"
+              },
+              "clinics": [
+                {
+                  "id": "fam_med_jubail",
+                  "name": "Family Medicine Clinic",
+                  "specialty": "family_medicine",
+                  "status": "open",
+                  "constraints": {
+                    "age_min": 0,
+                    "age_max": 120,
+                    "gender": "all"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "tarafia",
+          "name": "Tarafia Network",
+          "name_ar": "شبكة الطرفية",
+          "centers": [
+            {
+              "id": "phc_tarafia",
+              "name": "Tarafia Primary Health Center",
+              "name_ar": "مركز الطرفية الصحي",
+              "type": "phc",
+              "layer": 1,
+              "location": {
+                "city": "Tarafia",
+                "district": "Central"
+              },
+              "clinics": [
+                {
+                  "id": "fam_med_tarafia",
+                  "name": "Family Medicine Clinic",
+                  "specialty": "family_medicine",
+                  "status": "open",
+                  "constraints": {
+                    "age_min": 0,
+                    "age_max": 120,
+                    "gender": "all"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

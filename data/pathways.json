@@ -1,0 +1,311 @@
+{
+  "pathways": {
+    "adult_obesity": {
+      "id": "adult_obesity",
+      "name": "Adult Obesity Pathway",
+      "name_ar": "مسار السمنة للبالغين",
+      "description": "Clinical pathway for managing adult obesity (age >= 15 years)",
+      "version": "1.0",
+      "applicable_age": {
+        "min": 15,
+        "max": 120
+      },
+      "entry_point": "screening",
+      "nodes": {
+        "screening": {
+          "id": "screening",
+          "type": "assessment",
+          "name": "Screening Protocol in PHCs",
+          "description": "Initial screening at Primary Health Center",
+          "layer": "phc",
+          "required_measurements": ["bmi", "waist_circumference"],
+          "next": "bmi_check"
+        },
+        "bmi_check": {
+          "id": "bmi_check",
+          "type": "decision",
+          "name": "BMI Assessment",
+          "description": "Check patient BMI value",
+          "conditions": [
+            {
+              "id": "bmi_normal",
+              "expression": "bmi < 25",
+              "description": "BMI < 25 (Normal weight)",
+              "next": "exit_healthy"
+            },
+            {
+              "id": "bmi_overweight_secondary",
+              "expression": "bmi >= 25 AND has_secondary_cause == true",
+              "description": "BMI >= 25 with secondary cause",
+              "next": "refer_specialty"
+            },
+            {
+              "id": "bmi_overweight_primary",
+              "expression": "bmi >= 25 AND has_secondary_cause == false",
+              "description": "BMI >= 25 without secondary cause",
+              "next": "diagnostic_tests"
+            }
+          ]
+        },
+        "exit_healthy": {
+          "id": "exit_healthy",
+          "type": "endpoint",
+          "name": "Normal Weight - No Intervention",
+          "description": "Patient has normal BMI, no obesity intervention needed",
+          "layer": "phc",
+          "outcome": "discharge",
+          "recommendations": ["Lifestyle counseling", "Annual screening"]
+        },
+        "refer_specialty": {
+          "id": "refer_specialty",
+          "type": "referral",
+          "name": "Refer to Appropriate Specialty",
+          "description": "Secondary cause identified - refer to appropriate specialty",
+          "layer": "mega",
+          "target_specialties": ["endocrinology", "psychiatry", "neurology"],
+          "outcome": "specialty_referral",
+          "next": null
+        },
+        "diagnostic_tests": {
+          "id": "diagnostic_tests",
+          "type": "assessment",
+          "name": "Diagnostic Tests",
+          "description": "Order diagnostic workup",
+          "layer": "phc",
+          "required_tests": [
+            {"code": "CBC", "name": "Complete Blood Count"},
+            {"code": "RFT", "name": "Renal Function Test"},
+            {"code": "LFT", "name": "Liver Function Test"},
+            {"code": "LIPID", "name": "Fasting Lipid Profile"},
+            {"code": "URIC", "name": "Uric Acid"},
+            {"code": "UA", "name": "Urine Analysis"},
+            {"code": "FBS", "name": "Fasting Blood Sugar"},
+            {"code": "HBA1C", "name": "HbA1c"},
+            {"code": "TFT", "name": "Thyroid Function Test"}
+          ],
+          "next": "bmi_severity_check"
+        },
+        "bmi_severity_check": {
+          "id": "bmi_severity_check",
+          "type": "decision",
+          "name": "BMI Severity Assessment",
+          "description": "Assess BMI severity and comorbidities",
+          "conditions": [
+            {
+              "id": "bmi_morbid",
+              "expression": "bmi >= 40",
+              "description": "BMI >= 40 (Morbid Obesity)",
+              "next": "obesity_clinic"
+            },
+            {
+              "id": "bmi_severe_comorbid",
+              "expression": "bmi >= 35 AND bmi < 40 AND has_comorbidities == true",
+              "description": "BMI 35-39.9 with comorbidities",
+              "next": "obesity_clinic"
+            },
+            {
+              "id": "bmi_moderate_no_comorbid",
+              "expression": "bmi >= 25 AND bmi < 35 AND has_comorbidities == false",
+              "description": "BMI 25-34.9 without comorbidities",
+              "next": "phc_management"
+            },
+            {
+              "id": "bmi_severe_no_comorbid",
+              "expression": "bmi >= 35 AND bmi < 40 AND has_comorbidities == false",
+              "description": "BMI 35-39.9 without comorbidities",
+              "next": "phc_management"
+            }
+          ]
+        },
+        "phc_management": {
+          "id": "phc_management",
+          "type": "treatment",
+          "name": "Follow and Manage in PHC",
+          "description": "Conservative management at Primary Health Center",
+          "layer": "phc",
+          "services": [
+            {"type": "health_coaching", "name": "Health Coach"},
+            {"type": "nutrition", "name": "Nutrition Counseling"},
+            {"type": "mental_health", "name": "Mental Health Support"}
+          ],
+          "next": "phc_evaluation"
+        },
+        "phc_evaluation": {
+          "id": "phc_evaluation",
+          "type": "evaluation",
+          "name": "Evaluate After 3 Months",
+          "description": "Evaluate progress after 3 months - target 5% weight loss",
+          "layer": "phc",
+          "evaluation_period_months": 3,
+          "success_criteria": {
+            "weight_loss_percent": 5
+          },
+          "next": "phc_goal_check"
+        },
+        "phc_goal_check": {
+          "id": "phc_goal_check",
+          "type": "decision",
+          "name": "PHC Goal Assessment",
+          "description": "Check if 5% weight loss goal achieved",
+          "conditions": [
+            {
+              "id": "goal_achieved",
+              "expression": "weight_loss_percent >= 5",
+              "description": "Goal achieved - 5% weight loss",
+              "next": "continue_phc_followup"
+            },
+            {
+              "id": "goal_not_achieved",
+              "expression": "weight_loss_percent < 5",
+              "description": "Goal not achieved",
+              "next": "obesity_clinic"
+            }
+          ]
+        },
+        "continue_phc_followup": {
+          "id": "continue_phc_followup",
+          "type": "endpoint",
+          "name": "Continue Follow-up in PHC",
+          "description": "Continue regular follow-up at Primary Health Center",
+          "layer": "phc",
+          "outcome": "managed_phc",
+          "recommendations": ["Regular monitoring", "Lifestyle maintenance"]
+        },
+        "obesity_clinic": {
+          "id": "obesity_clinic",
+          "type": "referral",
+          "name": "Obesity Clinic (Mega Center)",
+          "description": "Referral to specialized Obesity Clinic at Mega Center",
+          "layer": "mega",
+          "target_specialty": "obesity",
+          "target_center_type": "mega",
+          "services": [
+            {"type": "health_coaching", "name": "Health Coach"},
+            {"type": "nutrition", "name": "Nutrition"},
+            {"type": "mental_health", "name": "Mental Health"}
+          ],
+          "next": "mega_evaluation"
+        },
+        "mega_evaluation": {
+          "id": "mega_evaluation",
+          "type": "evaluation",
+          "name": "Evaluate After 6 Months",
+          "description": "Evaluate progress after 6 months - target 5% weight loss",
+          "layer": "mega",
+          "evaluation_period_months": 6,
+          "success_criteria": {
+            "weight_loss_percent": 5
+          },
+          "next": "mega_goal_check"
+        },
+        "mega_goal_check": {
+          "id": "mega_goal_check",
+          "type": "decision",
+          "name": "Mega Center Goal Assessment",
+          "description": "Check if 5% weight loss goal achieved at Mega Center",
+          "conditions": [
+            {
+              "id": "mega_goal_achieved",
+              "expression": "weight_loss_percent >= 5",
+              "description": "Goal achieved - 5% weight loss",
+              "next": "continue_mega_followup"
+            },
+            {
+              "id": "mega_goal_not_achieved",
+              "expression": "weight_loss_percent < 5",
+              "description": "Goal not achieved - escalate to hospital",
+              "next": "dmc_referral"
+            }
+          ]
+        },
+        "continue_mega_followup": {
+          "id": "continue_mega_followup",
+          "type": "treatment",
+          "name": "Continue Follow-up with Support Team",
+          "description": "Continue follow-up with Health coach, Nutrition, Mental health for 1 year",
+          "layer": "mega",
+          "duration_months": 12,
+          "services": [
+            {"type": "health_coaching", "name": "Health Coach"},
+            {"type": "nutrition", "name": "Nutrition"},
+            {"type": "mental_health", "name": "Mental Health"}
+          ],
+          "next": "discharge_tbc"
+        },
+        "discharge_tbc": {
+          "id": "discharge_tbc",
+          "type": "endpoint",
+          "name": "Discharge to TBC",
+          "description": "Discharge to community-based care after successful treatment",
+          "layer": "phc",
+          "outcome": "discharge_success"
+        },
+        "dmc_referral": {
+          "id": "dmc_referral",
+          "type": "referral",
+          "name": "DMC (Hospital & Specialized Center)",
+          "description": "Referral to Dammam Medical Complex for surgical evaluation",
+          "layer": "hospital",
+          "target_specialty": "bariatric_surgery",
+          "target_center_type": "hospital",
+          "next": "bariatric_evaluation"
+        },
+        "bariatric_evaluation": {
+          "id": "bariatric_evaluation",
+          "type": "assessment",
+          "name": "Bariatric Surgery Evaluation",
+          "description": "Evaluation for bariatric surgery candidacy",
+          "layer": "hospital",
+          "next": "post_surgery_followup"
+        },
+        "post_surgery_followup": {
+          "id": "post_surgery_followup",
+          "type": "endpoint",
+          "name": "Post Bariatric Surgery Follow-up",
+          "description": "Long-term follow-up after bariatric surgery",
+          "layer": "hospital",
+          "outcome": "surgical_management"
+        }
+      }
+    }
+  },
+  "specialties": [
+    {"id": "family_medicine", "name": "Family Medicine", "name_ar": "طب الأسرة"},
+    {"id": "internal_medicine", "name": "Internal Medicine", "name_ar": "الباطنية"},
+    {"id": "cardiology", "name": "Cardiology", "name_ar": "أمراض القلب"},
+    {"id": "neurology", "name": "Neurology", "name_ar": "الأعصاب"},
+    {"id": "orthopedics", "name": "Orthopedics", "name_ar": "العظام"},
+    {"id": "pediatrics", "name": "Pediatrics", "name_ar": "طب الأطفال"},
+    {"id": "dermatology", "name": "Dermatology", "name_ar": "الجلدية"},
+    {"id": "psychiatry", "name": "Psychiatry", "name_ar": "الطب النفسي"},
+    {"id": "endocrinology", "name": "Endocrinology", "name_ar": "الغدد الصماء"},
+    {"id": "gastroenterology", "name": "Gastroenterology", "name_ar": "الجهاز الهضمي"},
+    {"id": "oncology", "name": "Oncology", "name_ar": "الأورام"},
+    {"id": "urology", "name": "Urology", "name_ar": "المسالك البولية"},
+    {"id": "obesity", "name": "Obesity Management", "name_ar": "إدارة السمنة"},
+    {"id": "bariatric_surgery", "name": "Bariatric Surgery", "name_ar": "جراحة السمنة"},
+    {"id": "general_surgery", "name": "General Surgery", "name_ar": "الجراحة العامة"},
+    {"id": "plastic_surgery", "name": "Plastic Surgery", "name_ar": "جراحة التجميل"},
+    {"id": "pediatric_obesity", "name": "Pediatric Obesity", "name_ar": "سمنة الأطفال"},
+    {"id": "pediatric_endocrinology", "name": "Pediatric Endocrinology", "name_ar": "غدد صماء الأطفال"}
+  ],
+  "comorbidities": [
+    {"id": "diabetes", "name": "Diabetes Mellitus", "name_ar": "السكري"},
+    {"id": "hypertension", "name": "Hypertension", "name_ar": "ارتفاع ضغط الدم"},
+    {"id": "dyslipidemia", "name": "Dyslipidemia", "name_ar": "اضطراب الدهون"},
+    {"id": "sleep_apnea", "name": "Sleep Apnea", "name_ar": "انقطاع النفس النومي"},
+    {"id": "osteoarthritis", "name": "Osteoarthritis", "name_ar": "التهاب المفاصل"},
+    {"id": "gerd", "name": "GERD", "name_ar": "ارتجاع المريء"},
+    {"id": "pcos", "name": "PCOS", "name_ar": "تكيس المبايض"},
+    {"id": "fatty_liver", "name": "Fatty Liver Disease", "name_ar": "الكبد الدهني"}
+  ],
+  "secondary_causes": [
+    {"id": "hypothyroidism", "name": "Hypothyroidism", "name_ar": "قصور الغدة الدرقية", "refer_to": "endocrinology"},
+    {"id": "cushing", "name": "Cushing's Syndrome", "name_ar": "متلازمة كوشينغ", "refer_to": "endocrinology"},
+    {"id": "pcos", "name": "PCOS", "name_ar": "تكيس المبايض", "refer_to": "endocrinology"},
+    {"id": "medication_induced", "name": "Medication-Induced", "name_ar": "بسبب الأدوية", "refer_to": "internal_medicine"},
+    {"id": "eating_disorder", "name": "Eating Disorder", "name_ar": "اضطراب الأكل", "refer_to": "psychiatry"},
+    {"id": "depression", "name": "Depression", "name_ar": "الاكتئاب", "refer_to": "psychiatry"},
+    {"id": "genetic_syndrome", "name": "Genetic Syndrome", "name_ar": "متلازمة وراثية", "refer_to": "genetics"}
+  ]
+}
